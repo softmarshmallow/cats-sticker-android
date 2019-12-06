@@ -85,10 +85,30 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
     public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.ViewHolder> {
 
         StickerModel[] stickerDataset = new StickerModel[]{
+                new StickerModel(R.drawable.sticker1, true),
+                new StickerModel(R.drawable.sticker2, true),
+                new StickerModel(R.drawable.sticker3, true),
+                new StickerModel(R.drawable.sticker4, true),
+                new StickerModel(R.drawable.sticker5, true),
+                new StickerModel(R.drawable.sticker6, true),
+                new StickerModel(R.drawable.sticker7, true),
+                new StickerModel(R.drawable.sticker8, true),
+                new StickerModel(R.drawable.sticker9, true),
+                new StickerModel(R.drawable.sticker10, true),
+                new StickerModel(R.drawable.sticker11, true),
+                new StickerModel(R.drawable.sticker12, true),
+                new StickerModel(R.drawable.sticker13, true),
+                new StickerModel(R.drawable.sticker14, true),
+                new StickerModel(R.drawable.sticker15, true),
+                new StickerModel(R.drawable.sticker16, true),
+                new StickerModel(R.drawable.sticker17, true),
+                new StickerModel(R.drawable.sticker18, true),
+                new StickerModel(R.drawable.sticker19, true),
+                new StickerModel(R.drawable.sticker20, true),
+                new StickerModel(R.drawable.sticker21, true),
+                new StickerModel(R.drawable.sticker22, true),
+                new StickerModel(R.drawable.sticker23, true),
                 new StickerModel(R.drawable.aa, false),
-                new StickerModel(R.drawable.aa, false),
-                new StickerModel(R.drawable.bb, true),
-                new StickerModel(R.drawable.bb, true),
         };
 
         @Override
@@ -111,6 +131,7 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
             ImageView imgSticker;
             ImageView premiumContentWatermark;
             Context context;
+
             ViewHolder(View itemView, Context context) {
                 super(itemView);
                 this.context = context;
@@ -129,12 +150,11 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
                 });
             }
 
-            public void bindViewWithData(StickerModel data){
+            public void bindViewWithData(StickerModel data) {
                 imgSticker.setImageResource(data.resource);
-                if (data.isPremium)
-                {
+                if (data.isPremium) {
                     premiumContentWatermark.setVisibility(View.INVISIBLE);
-                }else {
+                } else {
                     premiumContentWatermark.setVisibility(View.VISIBLE);
                     premiumContentWatermark.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -164,11 +184,11 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
     }
 }
 
-class StickerModel{
+class StickerModel {
     int resource = R.drawable.got;
     boolean isPremium = false;
 
-    StickerModel(int resource , boolean isPremium ){
+    StickerModel(int resource, boolean isPremium) {
         this.resource = resource;
         this.isPremium = isPremium;
     }
