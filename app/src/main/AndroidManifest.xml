@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".ui.CatPhotoEditorActivity" />
         <activity android:name=".ui.MainActivity"/>
+        <activity android:name=".ui.photoeditor.EditImageActivity" />
+        <activity android:name=".ui.photoeditor.base.BaseActivity" />
     </application>
 
 </manifest>
