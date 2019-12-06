@@ -25,6 +25,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.ChangeBounds;
 import androidx.transition.TransitionManager;
 
+import com.google.firebase.storage.FirebaseStorage;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -217,7 +219,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     private void saveImage() {
         if (requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             showLoading("Saving...");
-            File file = new File(Environment.getExternalStorageDirectory()
+            File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES)
                     + File.separator + ""
                     + System.currentTimeMillis() + ".png");
             try {
