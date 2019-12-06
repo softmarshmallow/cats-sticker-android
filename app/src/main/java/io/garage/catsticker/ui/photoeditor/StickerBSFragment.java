@@ -2,6 +2,7 @@ package io.garage.catsticker.ui.photoeditor;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import io.garage.catsticker.R;
+import io.garage.catsticker.ui.dialogs.GoPremiumDialog;
 
 public class StickerBSFragment extends BottomSheetDialogFragment {
 
@@ -82,42 +84,66 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
 
     public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.ViewHolder> {
 
-        int[] stickerList = new int[]{R.drawable.aa, R.drawable.bb};
+        StickerModel[] stickerDataset = new StickerModel[]{
+                new StickerModel(R.drawable.aa, false),
+                new StickerModel(R.drawable.aa, false),
+                new StickerModel(R.drawable.bb, true),
+                new StickerModel(R.drawable.bb, true),
+        };
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_sticker, parent, false);
-            return new ViewHolder(view);
+            return new ViewHolder(view, getContext());
         }
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.imgSticker.setImageResource(stickerList[position]);
+            holder.bindViewWithData(stickerDataset[position]);
         }
 
         @Override
         public int getItemCount() {
-            return stickerList.length;
+            return stickerDataset.length;
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
             ImageView imgSticker;
-
-            ViewHolder(View itemView) {
+            ImageView premiumContentWatermark;
+            Context context;
+            ViewHolder(View itemView, Context context) {
                 super(itemView);
+                this.context = context;
                 imgSticker = itemView.findViewById(R.id.imgSticker);
-
+                premiumContentWatermark = itemView.findViewById(R.id.premiumContentWatermark);
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (mStickerListener != null) {
                             mStickerListener.onStickerClick(
                                     BitmapFactory.decodeResource(getResources(),
-                                            stickerList[getLayoutPosition()]));
+                                            stickerDataset[getLayoutPosition()].resource));
                         }
                         dismiss();
                     }
                 });
+            }
+
+            public void bindViewWithData(StickerModel data){
+                imgSticker.setImageResource(data.resource);
+                if (data.isPremium)
+                {
+                    premiumContentWatermark.setVisibility(View.INVISIBLE);
+                }else {
+                    premiumContentWatermark.setVisibility(View.VISIBLE);
+                    premiumContentWatermark.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Dialog goPremiumDialog = new GoPremiumDialog(context);
+                            goPremiumDialog.show();
+                        }
+                    });
+                }
             }
         }
     }
@@ -135,5 +161,15 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
 
     private String getEmojiByUnicode(int unicode) {
         return new String(Character.toChars(unicode));
+    }
+}
+
+class StickerModel{
+    int resource = R.drawable.got;
+    boolean isPremium = false;
+
+    StickerModel(int resource , boolean isPremium ){
+        this.resource = resource;
+        this.isPremium = isPremium;
     }
 }

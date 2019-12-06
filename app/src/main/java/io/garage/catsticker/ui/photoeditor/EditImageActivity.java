@@ -71,6 +71,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.FullscreenTheme);
         makeFullScreen();
         setContentView(R.layout.activity_edit_image);
 
