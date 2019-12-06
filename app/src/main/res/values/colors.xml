@@ -5,6 +5,8 @@
     <color name="colorAccent">#313131</color>
 
 
+    <color name="splash_background">#F95F83</color>
+
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="blue_color_picker">#0066FF</color>

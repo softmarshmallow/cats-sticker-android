@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/splash_background"
     android:theme="@style/FullscreenTheme"
     tools:context=".ui.SplashActivity">
 
@@ -20,10 +21,12 @@
     </androidx.viewpager.widget.ViewPager>
 
     <Button
-        android:text="Main"
+        android:text="@string/get_started"
+        android:textColor="@color/white"
+        android:background="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/go_main_btn"
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="60dp">
     </Button>
 </androidx.constraintlayout.widget.ConstraintLayout>

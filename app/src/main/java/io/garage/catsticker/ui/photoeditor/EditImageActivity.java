@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -38,12 +39,15 @@ import io.garage.catsticker.ui.photoeditor.filters.FilterViewAdapter;
 import io.garage.catsticker.ui.photoeditor.tools.EditingToolsAdapter;
 import io.garage.catsticker.ui.photoeditor.tools.ToolType;
 import ja.burhanrashid52.photoeditor.OnPhotoEditorListener;
+import ja.burhanrashid52.photoeditor.OnSaveBitmap;
 import ja.burhanrashid52.photoeditor.PhotoEditor;
 import ja.burhanrashid52.photoeditor.PhotoEditorView;
 import ja.burhanrashid52.photoeditor.PhotoFilter;
 import ja.burhanrashid52.photoeditor.SaveSettings;
 import ja.burhanrashid52.photoeditor.TextStyleBuilder;
 import ja.burhanrashid52.photoeditor.ViewType;
+
+import java.io.ByteArrayOutputStream;
 
 public class EditImageActivity extends BaseActivity implements OnPhotoEditorListener,
         View.OnClickListener,
@@ -237,13 +241,37 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                         hideLoading();
                         showSnackbar("Image Saved Successfully");
                         mPhotoEditorView.getSource().setImageURI(Uri.fromFile(new File(imagePath)));
-                        moveToReviewActivity();
+                        // moveToReviewActivity();
                     }
 
                     @Override
                     public void onFailure(@NonNull Exception exception) {
                         hideLoading();
                         showSnackbar("Failed to save Image");
+                    }
+                });
+
+                mPhotoEditor.saveAsBitmap(saveSettings, new OnSaveBitmap() {
+                    @Override
+                    public void onBitmapReady(Bitmap saveBitmap) {
+                        Intent share = new Intent(Intent.ACTION_SEND);
+                        share.setType("image/jpeg");
+
+                        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                        saveBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+
+                        String path = MediaStore.Images.Media.insertImage(
+                                getContentResolver(),
+                                saveBitmap, "Title", null
+                        );
+                        Uri imageUri = Uri.parse(path);
+                        share.putExtra(Intent.EXTRA_STREAM, imageUri);
+                        startActivity(Intent.createChooser(share, "Select"));
+                    }
+
+                    @Override
+                    public void onFailure(Exception e) {
+
                     }
                 });
             } catch (IOException e) {
@@ -255,6 +283,8 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         else {
 
         }
+
+
     }
 
     private void moveToReviewActivity() {
