@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1041758175556",
+    "firebase_url": "https://cats-sticker.firebaseio.com",
+    "project_id": "cats-sticker",
+    "storage_bucket": "cats-sticker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041758175556:android:b5ffa3b57437617a0d9711",
+        "android_client_info": {
+          "package_name": "io.garage.catsticker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1041758175556-n1lo2nnn4j01gtqn3h4ho3e5sn9ockl6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt0etqB7I5BZXCcztCxizX7pHRgC8u7SE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1041758175556-n1lo2nnn4j01gtqn3h4ho3e5sn9ockl6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
