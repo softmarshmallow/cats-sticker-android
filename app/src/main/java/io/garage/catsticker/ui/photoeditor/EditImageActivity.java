@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.IOException;
 
 import io.garage.catsticker.R;
+import io.garage.catsticker.ui.ReviewAndShareActivity;
 import io.garage.catsticker.ui.photoeditor.base.BaseActivity;
 import io.garage.catsticker.ui.photoeditor.filters.FilterListener;
 import io.garage.catsticker.ui.photoeditor.filters.FilterViewAdapter;
@@ -233,6 +234,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                         hideLoading();
                         showSnackbar("Image Saved Successfully");
                         mPhotoEditorView.getSource().setImageURI(Uri.fromFile(new File(imagePath)));
+                        moveToReviewActivity();
                     }
 
                     @Override
@@ -247,6 +249,13 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                 showSnackbar(e.getMessage());
             }
         }
+        else {
+
+        }
+    }
+
+    private void moveToReviewActivity() {
+        startActivity(new Intent(this, ReviewAndShareActivity.class));
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import io.garage.catsticker.BuildConfig
 import io.garage.catsticker.R
+import io.garage.catsticker.ui.photoeditor.EditImageActivity
 import io.garage.catsticker.utils.GotoActivity
 
 class SplashActivity : AppCompatActivity() {
@@ -19,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun goToMainActivityWhenReady() {
         this.finish()
-        this.GotoActivity(MainActivity::class.java)
+        this.GotoActivity(EditImageActivity::class.java)
     }
 
     private fun dev_runTestScripts() {
